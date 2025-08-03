@@ -7,6 +7,35 @@
 <div class="alert alert-danger text-center mb-4" role="alert">
     <h4 class="alert-heading">⚠️ INTENTIONALLY VULNERABLE PAGE ⚠️</h4>
     <p class="mb-0">This page contains security vulnerabilities for Activity 3 educational demonstration only.</p>
+    <p class="mb-0"><strong>DO NOT USE THIS CODE IN PRODUCTION!</strong></p>
+</div>
+
+<!-- Instructions Panel -->
+<div class="alert alert-info mb-4" role="alert">
+    <h5 class="alert-heading"><i class="fas fa-info-circle"></i> How to Use This Demo</h5>
+    <p><strong>This page demonstrates common security vulnerabilities. Try these examples to see them in action:</strong></p>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <h6>🚨 XSS Attacks to Try:</h6>
+            <ul class="mb-0">
+                <li>Bio field: <code>&lt;script&gt;alert('XSS!')&lt;/script&gt;</code></li>
+                <li>Username: <code>&lt;img src=x onerror=alert('XSS')&gt;</code></li>
+                <li>Search: <code>&lt;svg onload=alert('XSS')&gt;</code></li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h6>💉 SQL Injection to Try:</h6>
+            <ul class="mb-0">
+                <li>Search: <code>' OR '1'='1</code></li>
+                <li>Username: <code>admin'--</code></li>
+                <li>Search: <code>'; DROP TABLE Users; --</code></li>
+            </ul>
+        </div>
+    </div>
+    
+    <hr>
+    <p class="mb-0"><strong>After testing:</strong> Visit the <a href="/secure-demo" class="alert-link">Secure Demo</a> to see how these vulnerabilities are properly fixed!</p>
 </div>
 
 <div class="container">

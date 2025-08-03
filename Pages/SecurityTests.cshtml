@@ -53,6 +53,19 @@
                 <div class="jumbotron bg-light p-5 rounded text-center">
                     <h2>🚀 Ready to Test SafeVault Security</h2>
                     <p class="lead">Click the button above to execute our comprehensive security test suite covering:</p>
+                    
+                    <!-- Quick Start Guide -->
+                    <div class="alert alert-info text-start mb-4">
+                        <h6><i class="fas fa-rocket"></i> Quick Start Guide</h6>
+                        <p class="mb-2"><strong>New to security testing?</strong> Here's how to get the most from this platform:</p>
+                        <ol>
+                            <li><strong>Run Tests:</strong> Click "Run Security Tests" above to see all 52 tests execute</li>
+                            <li><strong>Learn:</strong> Scroll down to the "Activity 3 - Interactive Security Education" section</li>
+                            <li><strong>Practice:</strong> Try the vulnerable demo with sample attacks, then see the secure version</li>
+                            <li><strong>Study:</strong> Review the code examples in the educational tabs</li>
+                        </ol>
+                    </div>
+                    
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <div class="card border-primary">
@@ -77,6 +90,172 @@
                                         <li>✓ Role-Based Authorization</li>
                                         <li>✓ Session Management</li>
                                     </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Activity 3 Educational Demos - Integrated into Main Dashboard -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card border-info">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="card-title mb-0">🎓 Activity 3 - Interactive Security Education</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Learn about security vulnerabilities and their fixes with interactive examples:</p>
+                                
+                                <!-- Tabbed Interface for Educational Content -->
+                                <ul class="nav nav-tabs" id="securityTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
+                                            📊 Overview
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="xss-tab" data-bs-toggle="tab" data-bs-target="#xss" type="button" role="tab">
+                                            ⚠️ XSS Demo
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="csrf-tab" data-bs-toggle="tab" data-bs-target="#csrf" type="button" role="tab">
+                                            🔒 CSRF Demo
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="sql-tab" data-bs-toggle="tab" data-bs-target="#sql" type="button" role="tab">
+                                            💉 SQL Demo
+                                        </button>
+                                    </li>
+                                </ul>
+                                
+                                <div class="tab-content mt-3" id="securityTabContent">
+                                    <!-- Overview Tab -->
+                                    <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                                        <div class="alert alert-primary">
+                                            <h6><i class="fas fa-lightbulb"></i> How to Use Activity 3 Demos</h6>
+                                            <p class="mb-2"><strong>Step 1:</strong> Visit the <strong>Vulnerable Demo</strong> and try the suggested attacks</p>
+                                            <p class="mb-2"><strong>Step 2:</strong> Visit the <strong>Secure Demo</strong> with the same inputs - see how they're safely handled</p>
+                                            <p class="mb-0"><strong>Step 3:</strong> Study the code examples in the tabs below to understand the fixes</p>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card border-danger">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-bug"></i> Vulnerable Implementation</h6>
+                                                        <p class="card-text">Examples of common security vulnerabilities that attackers exploit.</p>
+                                                        <div class="d-grid">
+                                                            <a href="/vulnerable-demo" class="btn btn-outline-danger" target="_blank">
+                                                                <i class="fas fa-external-link-alt"></i> Try Vulnerable Demo
+                                                            </a>
+                                                        </div>
+                                                        <small class="text-muted mt-2 d-block">Try XSS: <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card border-success">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-shield-alt"></i> Secure Implementation</h6>
+                                                        <p class="card-text">Proper security measures and best practices to prevent attacks.</p>
+                                                        <div class="d-grid">
+                                                            <a href="/secure-demo" class="btn btn-outline-success" target="_blank">
+                                                                <i class="fas fa-external-link-alt"></i> View Secure Demo
+                                                            </a>
+                                                        </div>
+                                                        <small class="text-muted mt-2 d-block">Same input safely handled with encoding</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- XSS Demo Tab -->
+                                    <div class="tab-pane fade" id="xss" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6 class="text-danger">❌ Vulnerable Code</h6>
+                                                <pre class="bg-light p-3 border"><code>// Raw HTML output - DANGEROUS!
+@@Html.Raw(userInput)
+
+// No encoding - VULNERABLE!
+&lt;div&gt;@@userInput&lt;/div&gt;</code></pre>
+                                                <div class="alert alert-warning">
+                                                    <small><strong>Risk:</strong> Allows script injection attacks</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6 class="text-success">✅ Secure Code</h6>
+                                                <pre class="bg-light p-3 border"><code>// HTML encoded - SAFE!
+@@Html.Encode(userInput)
+
+// Automatic encoding - SECURE!
+&lt;div&gt;@@userInput&lt;/div&gt;</code></pre>
+                                                <div class="alert alert-success">
+                                                    <small><strong>Protection:</strong> HTML encoding prevents script execution</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- CSRF Demo Tab -->
+                                    <div class="tab-pane fade" id="csrf" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6 class="text-danger">❌ Vulnerable Form</h6>
+                                                <pre class="bg-light p-3 border"><code>&lt;form method="post"&gt;
+  &lt;!-- No CSRF protection --&gt;
+  &lt;input name="amount" /&gt;
+  &lt;button&gt;Transfer&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                                                <div class="alert alert-warning">
+                                                    <small><strong>Risk:</strong> Cross-site request forgery attacks</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6 class="text-success">✅ Secure Form</h6>
+                                                <pre class="bg-light p-3 border"><code>&lt;form method="post"&gt;
+  @@Html.AntiForgeryToken()
+  &lt;input name="amount" /&gt;
+  &lt;button&gt;Transfer&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                                                <div class="alert alert-success">
+                                                    <small><strong>Protection:</strong> Anti-forgery tokens prevent CSRF</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- SQL Demo Tab -->
+                                    <div class="tab-pane fade" id="sql" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6 class="text-danger">❌ Vulnerable Query</h6>
+                                                <pre class="bg-light p-3 border"><code>// String concatenation - DANGEROUS!
+var sql = "SELECT * FROM Users " +
+          "WHERE Username = '" + 
+          username + "'";
+db.ExecuteRaw(sql);</code></pre>
+                                                <div class="alert alert-warning">
+                                                    <small><strong>Risk:</strong> SQL injection attacks</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6 class="text-success">✅ Secure Query</h6>
+                                                <pre class="bg-light p-3 border"><code>// Parameterized query - SAFE!
+var user = await context.Users
+  .Where(u => u.Username == username)
+  .FirstOrDefaultAsync();
+
+// EF Core handles parameterization</code></pre>
+                                                <div class="alert alert-success">
+                                                    <small><strong>Protection:</strong> Parameters prevent injection</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

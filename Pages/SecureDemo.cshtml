@@ -7,6 +7,37 @@
 <div class="alert alert-success text-center mb-4" role="alert">
     <h4 class="alert-heading">✅ SECURE VERSION - VULNERABILITIES FIXED</h4>
     <p class="mb-0">This page demonstrates the secure implementation after fixing the vulnerabilities.</p>
+    <p class="mb-0"><strong>This is how production code should be written!</strong></p>
+</div>
+
+<!-- Instructions Panel -->
+<div class="alert alert-info mb-4" role="alert">
+    <h5 class="alert-heading"><i class="fas fa-graduation-cap"></i> What's Been Fixed Here</h5>
+    <p><strong>Compare this secure implementation with the vulnerable version. Try the same attacks - they won't work!</strong></p>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <h6>🛡️ XSS Protection:</h6>
+            <ul class="mb-0">
+                <li>✅ HTML encoding (no @@Html.Raw)</li>
+                <li>✅ Input validation and sanitization</li>
+                <li>✅ Safe output rendering</li>
+                <li>✅ Content Security Policy ready</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h6>🔒 Other Security Measures:</h6>
+            <ul class="mb-0">
+                <li>✅ Anti-forgery tokens (CSRF protection)</li>
+                <li>✅ Input length validation</li>
+                <li>✅ Parameterized queries (SQL injection safe)</li>
+                <li>✅ Server-side validation</li>
+            </ul>
+        </div>
+    </div>
+    
+    <hr>
+    <p class="mb-0"><strong>Try the same attacks from the vulnerable demo:</strong> They should be blocked or harmlessly rendered as text!</p>
 </div>
 
 <div class="container">
