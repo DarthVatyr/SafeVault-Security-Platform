@@ -1,0 +1,187 @@
+@page "/secure-demo"
+@model SafeVault.Pages.SecureDemoModel
+@{
+    ViewData["Title"] = "Secure Demo - Activity 3 Fixed";
+}
+
+<div class="alert alert-success text-center mb-4" role="alert">
+    <h4 class="alert-heading">✅ SECURE VERSION - VULNERABILITIES FIXED</h4>
+    <p class="mb-0">This page demonstrates the secure implementation after fixing the vulnerabilities.</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">🔒 Secure User Form</h3>
+                </div>
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger">
+                            <!-- FIXED: HTML encoded output -->
+                            @Model.ErrorMessage
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                    {
+                        <div class="alert alert-success">
+                            <!-- FIXED: User input properly encoded -->
+                            Welcome back, <strong>@Model.UserInput</strong>! Your bio: @Model.UserBio
+                        </div>
+                    }
+
+                    <!-- FIXED: Anti-forgery token added -->
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+                        
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username" value="@Model.Username" required minlength="3" maxlength="50">
+                            <div class="form-text">3-50 characters, alphanumeric and underscores only</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="@Model.Email" required>
+                            <div class="form-text">Valid email address required</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="bio" class="form-label">Bio (Plain text only):</label>
+                            <textarea class="form-control" id="bio" name="bio" rows="3" maxlength="500">@Model.Bio</textarea>
+                            <div class="form-text">Maximum 500 characters. HTML tags will be removed.</div>
+                        </div>
+
+                        <!-- FIXED: Admin field removed from client -->
+                        
+                        <div class="mb-3">
+                            <label for="searchTerm" class="form-label">Search Users:</label>
+                            <input type="text" class="form-control" id="searchTerm" name="searchTerm" value="@Model.SearchTerm" maxlength="100">
+                            <div class="form-text">Search by username or email</div>
+                        </div>
+
+                        <button type="submit" name="action" value="register" class="btn btn-success me-2">Register User</button>
+                        <button type="submit" name="action" value="search" class="btn btn-primary me-2">Search Users</button>
+                    </form>
+
+                    @if (Model.SearchResults != null && Model.SearchResults.Any())
+                    {
+                        <div class="mt-4">
+                            <h4>Search Results: (@Model.SearchResults.Count found)</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var user in Model.SearchResults)
+                                        {
+                                            <tr>
+                                                <td>@user.Id</td>
+                                                <!-- FIXED: User data properly encoded -->
+                                                <td>@user.Username</td>
+                                                <td>@user.Email</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.ValidationErrors != null && Model.ValidationErrors.Any())
+                    {
+                        <div class="mt-3">
+                            <div class="alert alert-warning">
+                                <h5>Validation Errors:</h5>
+                                <ul class="mb-0">
+                                    @foreach (var error in Model.ValidationErrors)
+                                    {
+                                        <li>@error</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">✅ Security Measures Applied</h4>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <div class="list-group-item list-group-item-success">
+                            <strong>XSS Prevention</strong><br>
+                            <small>All output is HTML encoded</small>
+                        </div>
+                        <div class="list-group-item list-group-item-success">
+                            <strong>CSRF Protection</strong><br>
+                            <small>Anti-forgery tokens implemented</small>
+                        </div>
+                        <div class="list-group-item list-group-item-success">
+                            <strong>SQL Injection Prevention</strong><br>
+                            <small>Parameterized queries used</small>
+                        </div>
+                        <div class="list-group-item list-group-item-success">
+                            <strong>Input Validation</strong><br>
+                            <small>Server-side validation with sanitization</small>
+                        </div>
+                        <div class="list-group-item list-group-item-success">
+                            <strong>Error Handling</strong><br>
+                            <small>Generic error messages</small>
+                        </div>
+                        <div class="list-group-item list-group-item-success">
+                            <strong>Access Control</strong><br>
+                            <small>No client-side privilege escalation</small>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <h5>Security Features:</h5>
+                        <div class="small">
+                            <ul>
+                                <li>HTML encoding prevents XSS</li>
+                                <li>Parameterized queries prevent SQL injection</li>
+                                <li>Input validation and sanitization</li>
+                                <li>CSRF tokens prevent cross-site requests</li>
+                                <li>Generic error messages prevent information disclosure</li>
+                                <li>Server-side access control</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">🔍 Try These Tests</h5>
+                </div>
+                <div class="card-body">
+                    <p class="small">Try entering these in the form fields to see how they're handled securely:</p>
+                    <div class="small">
+                        <strong>XSS Attempts:</strong><br>
+                        <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code><br>
+                        <code>&lt;img src=x onerror=alert(1)&gt;</code><br><br>
+                        
+                        <strong>SQL Injection Attempts:</strong><br>
+                        <code>'; DROP TABLE Users; --</code><br>
+                        <code>' OR 1=1 --</code><br><br>
+                        
+                        <strong>Result:</strong> All malicious input is safely handled!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

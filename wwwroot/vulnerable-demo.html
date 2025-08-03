@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerable Form - Activity 3 Demo</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 50px auto; 
+            padding: 20px; 
+            background-color: #f8f9fa;
+        }
+        .warning-banner {
+            background-color: #dc3545;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: bold; 
+            color: #495057;
+        }
+        input[type="text"], input[type="password"], textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button { 
+            background-color: #dc3545; 
+            color: white; 
+            padding: 12px 30px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover { 
+            background-color: #c82333; 
+        }
+        .vulnerability-info {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .vulnerability-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .vulnerability-list li {
+            background-color: #f8d7da;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #dc3545;
+        }
+        .test-buttons {
+            margin-top: 20px;
+        }
+        .test-button {
+            background-color: #6c757d;
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+        .test-button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-banner">
+        ⚠️ INTENTIONALLY VULNERABLE FORM - FOR ACTIVITY 3 DEMONSTRATION ONLY ⚠️
+    </div>
+
+    <div class="form-container">
+        <h1>🔓 Vulnerable User Input Form</h1>
+        <p><strong>Educational Purpose:</strong> This form contains multiple security vulnerabilities for Activity 3 demonstration.</p>
+        
+        <!-- VULNERABILITY 1: No CSRF protection -->
+        <form id="vulnerable-form" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter username">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter password">
+            </div>
+            
+            <!-- VULNERABILITY 2: Accepts dangerous input -->
+            <div class="form-group">
+                <label for="bio">User Bio (supports HTML):</label>
+                <textarea id="bio" name="bio" placeholder="Tell us about yourself..."></textarea>
+            </div>
+            
+            <!-- VULNERABILITY 3: Hidden admin field that could be manipulated -->
+            <input type="hidden" id="isAdmin" name="isAdmin" value="false">
+            
+            <button type="submit">Submit Form</button>
+            <button type="button" class="test-button" onclick="testXSS()">Test XSS</button>
+            <button type="button" class="test-button" onclick="testSQLInjection()">Test SQL Injection</button>
+        </form>
+
+        <div id="result-area" style="margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 4px; display: none;">
+            <h3>Form Submission Result:</h3>
+            <div id="result-content"></div>
+        </div>
+
+        <div class="vulnerability-info">
+            <h3>🚨 Identified Vulnerabilities:</h3>
+            <ul class="vulnerability-list">
+                <li><strong>CSRF Vulnerability:</strong> Form lacks anti-forgery token protection</li>
+                <li><strong>XSS Vulnerability:</strong> Bio field accepts and displays raw HTML</li>
+                <li><strong>Input Validation:</strong> No server-side validation or sanitization</li>
+                <li><strong>Hidden Field Manipulation:</strong> Admin field could be modified by attackers</li>
+                <li><strong>No Rate Limiting:</strong> Form can be submitted repeatedly</li>
+                <li><strong>Information Disclosure:</strong> Detailed error messages reveal system info</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // VULNERABILITY: Client-side only validation that can be bypassed
+        document.getElementById('vulnerable-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const bio = document.getElementById('bio').value;
+            const isAdmin = document.getElementById('isAdmin').value;
+            
+            // VULNERABLE: No real validation, just display
+            const resultArea = document.getElementById('result-area');
+            const resultContent = document.getElementById('result-content');
+            
+            // VULNERABILITY: Direct HTML injection without encoding
+            resultContent.innerHTML = `
+                <p><strong>Username:</strong> ${username}</p>
+                <p><strong>Password:</strong> ${password.replace(/./g, '*')}</p>
+                <p><strong>Bio:</strong> ${bio}</p>
+                <p><strong>Admin Status:</strong> ${isAdmin}</p>
+                <p><em>Form submitted successfully (this is a demo - no actual processing)</em></p>
+            `;
+            
+            resultArea.style.display = 'block';
+        });
+
+        function testXSS() {
+            document.getElementById('bio').value = '<h2 style="color:red;">XSS Test</h2><img src="x" onerror="alert(\'XSS\')"/>';
+            alert('XSS test payload inserted into bio field. Submit to see the vulnerability.');
+        }
+
+        function testSQLInjection() {
+            document.getElementById('username').value = "admin'; DROP TABLE Users; --";
+            alert('SQL injection test payload inserted. In a real vulnerable system, this could be dangerous.');
+        }
+
+        // VULNERABILITY: Expose admin functionality
+        function makeAdmin() {
+            document.getElementById('isAdmin').value = 'true';
+            alert('Admin field manipulated! This shows how hidden fields can be modified.');
+        }
+
+        // Add secret admin button (demonstrates hidden functionality)
+        setTimeout(() => {
+            const adminBtn = document.createElement('button');
+            adminBtn.type = 'button';
+            adminBtn.className = 'test-button';
+            adminBtn.onclick = makeAdmin;
+            adminBtn.textContent = '🔓 Make Admin';
+            adminBtn.style.backgroundColor = '#dc3545';
+            document.querySelector('.test-buttons').appendChild(adminBtn);
+        }, 2000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+@page "/"
+@{
+    ViewData["Title"] = "SafeVault Security Platform";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="text-center mb-5">
+                <h1 class="display-3">🛡️ SafeVault</h1>
+                <p class="lead">Enterprise Security Platform</p>
+                <p class="text-muted">Complete input validation, authentication, and authorization system</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-primary">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">🧪 Security Test Dashboard</h3>
+                            <p class="card-text">
+                                Run comprehensive security tests covering SQL injection prevention, 
+                                XSS protection, authentication, and authorization systems.
+                            </p>
+                            <a href="/security-tests" class="btn btn-primary btn-lg">
+                                <i class="fas fa-play"></i> Run Security Tests
+                            </a>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <small class="text-muted">✓ 88 comprehensive security tests available</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-success">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">📋 HTML Form</h3>
+                            <p class="card-text">
+                                Test the secure user registration form with built-in input validation 
+                                and protection against common web vulnerabilities.
+                            </p>
+                            <a href="/webform.html" class="btn btn-success btn-lg">
+                                <i class="fas fa-edit"></i> Open Form
+                            </a>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <small class="text-muted">✓ Client-side and server-side validation</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0">🚀 API Endpoints</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Authentication & Authorization</h6>
+                                    <ul class="list-unstyled">
+                                        <li><code>POST /auth/register</code> - User registration</li>
+                                        <li><code>POST /auth/login</code> - User login</li>
+                                        <li><code>POST /auth/logout</code> - User logout</li>
+                                        <li><code>POST /auth/check-permission</code> - Permission check</li>
+                                        <li><code>POST /admin/unlock-user</code> - Admin functions</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Data & Validation</h6>
+                                    <ul class="list-unstyled">
+                                        <li><code>GET /users</code> - List users (paginated)</li>
+                                        <li><code>GET /users/search</code> - Search users</li>
+                                        <li><code>POST /validate</code> - Input validation test</li>
+                                        <li><code>POST /security-test</code> - Security tests</li>
+                                        <li><code>GET /health</code> - Health check</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle"></i> Security Features Implemented</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Activity 1 - Input Security:</strong>
+                                <ul class="mb-0">
+                                    <li>Multi-layer input validation</li>
+                                    <li>SQL injection prevention</li>
+                                    <li>XSS attack protection</li>
+                                    <li>Parameterized database queries</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Activity 2 - Authentication:</strong>
+                                <ul class="mb-0">
+                                    <li>BCrypt password hashing</li>
+                                    <li>Role-based access control</li>
+                                    <li>Session management</li>
+                                    <li>Account lockout protection</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+    }
+    
+    .container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .card {
+        transition: transform 0.2s;
+        border-radius: 10px;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 2rem;
+        border-radius: 25px;
+    }
+    
+    code {
+        background: #f8f9fa;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 0.9em;
+    }
+</style>

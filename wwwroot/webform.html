@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeVault - Secure Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="email"] { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        .error { color: red; font-size: 0.9em; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>SafeVault User Registration</h1>
+    <form action="/submit" method="post">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <div class="error" id="username-error"></div>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <div class="error" id="email-error"></div>
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Basic client-side validation (note: server-side validation is still required)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            let valid = true;
+            
+            // Clear previous errors
+            document.querySelectorAll('.error').forEach(el => el.textContent = '');
+            
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            // Basic validation - this is just for UX, real validation happens server-side
+            if (username.length < 3) {
+                document.getElementById('username-error').textContent = 'Username must be at least 3 characters';
+                valid = false;
+            }
+            
+            if (!email.includes('@')) {
+                document.getElementById('email-error').textContent = 'Please enter a valid email';
+                valid = false;
+            }
+            
+            if (!valid) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
